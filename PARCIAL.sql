@@ -1,0 +1,60 @@
+CREATE TABLESPACE COURSES DATAFILE 
+'C:\parcial\DATAFILE1.DBF' SIZE 50MB,
+'C:\parcial\DATAFILE2.DBF' SIZE 50MB;
+
+CREATE USER linac22 
+IDENTIFIED BY "lina123" 
+QUOTA 30 M on COURSES  
+PROFILE admin;
+
+CREATE PROFILE admin LIMIT 
+IDLE_TIME 15
+FAILED_LOGIN_ATTEMPTS 3
+SESSIONs_PER_USER   2;
+
+GRANT DBA TO dba_linac22
+GRANT CREATE SESSION TO dba_linac22
+
+
+CREATE TABLE COURSES(
+
+id int NOT NULL PRIMARY KEY,
+name varchar2(255) NOT NULL,
+date_start varchar2(255) NOT NULL,
+date_end varchar2(255) NOT NULL
+);
+
+
+CREATE TABLE STUDENTS (
+id int NOT NULL PRIMARY KEY,
+first_name varchar2(255) NOT NULL,
+last_name varchar2(255) NOT NULL,
+date_of_birth varchar2(255) NOT NULL, 
+city varchar2(255) NOT NULL, 
+address varchar2(255) NOT NULL
+);
+
+
+CREATE TABLE ATTENDANCE  (
+
+id int NOT NULL PRIMARY KEY,
+attendance_date varchar2(255) NOT NULL, 
+student_id int NOT NULL, 
+course_id int NOT NULL
+CREATE TABLE ATTENDANCE  (
+
+id int NOT NULL PRIMARY KEY,
+attendance_date varchar2(255) NOT NULL, 
+student_id int NOT NULL, 
+course_id int NOT NULL
+
+CONSTRAINT id_Pk PRIMARY KEY (ATTENDANCE_Id),
+	CONSTRAINT STUDENTS_Id_Fk FOREIGN KEY (STUDENTS_Id) REFERENCES STUDETS (STUDENTS_Id)
+	CONSTRAINT COURSES_Id_Fk FOREIGN KEY (COURSES_Id) REFERENCES STUDETS (COURSES_Id)
+);
+
+CREATE TABLE ANSWERS(
+id int NOT NULL PRIMARY KEY,
+number_of_question varchar2(255) NOT NULL,
+answer varchar2(255) NOT NULL
+); 
